@@ -1,0 +1,396 @@
+/* ===== 1. الخطوط والمتغيرات الأساسية ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary-color: #1a73e8;
+    --secondary-color: #34a853;
+    --accent-color: #0d6efd;
+    --dark-bg: #121212;
+    --light-bg: #f4f4f4;
+    --card-bg: #ffffff;
+    --text-main: #333;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== 2. التنسيق العام ===== */
+body {
+    margin: 0;
+    font-family: 'Cairo', Arial, sans-serif;
+    direction: rtl;
+    background-color: var(--light-bg);
+    color: var(--text-main);
+    transition: background-color 0.4s, color 0.4s;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%; /* تحسين من 50% لـ 100% عشان التجاوب */
+    height: auto;
+}
+
+/* ===== 3. الهيدر والأنميشن ===== */
+header {
+    background: linear-gradient(135deg, #375074 0%, #1a73e8 100%);
+    color: white; /* تم تعديل اللون من الأحمر الغامق للأبيض لسهولة القراءة */
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+    clip-path: ellipse(150% 100% at 50% 0%);
+}
+/* تنسيق أزرار الفصول */
+.tab-btn {
+    background-color: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 10px 25px;
+    cursor: pointer;
+    font-family: 'Cairo';
+    font-weight: bold;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.tab-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 15px rgba(26, 115, 232, 0.4);
+}
+
+.table-box {
+    animation: fadeIn 0.5s ease;
+}
+.chat {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 4px solid rgba(255,255,255,0.3);
+    border-radius: 50% !important; /* خليتها دائرية أشيك */
+    transition: var(--transition);
+}
+
+/* شعار الكتاب (المتحرك) */
+.book-logo {
+    top: 60px;
+    right: 20px;
+    width: 190px;
+    height: 110px;
+    perspective: 1000px;
+    cursor: pointer;
+    animation: moveBook 3s ease-in-out infinite;
+    position: absolute;
+    z-index: 10;
+}
+
+@keyframes moveBook {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-12px); }
+}
+
+.book-front, .book-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 12px;
+    color: white;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    transition: transform 0.6s ease;
+}
+
+.book-front { background-color: #0d6efd; }
+.book-back { background-color: #28a745; transform: rotateY(180deg); }
+
+.book-logo:hover .book-front { transform: rotateY(180deg); box-shadow: 0 0 25px #0d6efd; }
+.book-logo:hover .book-back { transform: rotateY(0deg); box-shadow: 0 0 25px #28a745; }
+
+/* ===== 4. سحابة التنبيه ===== */
+.info-bubble {
+    max-width: 600px;
+    background-color: #fffae6;
+    color: #856404;
+    padding: 15px 25px;
+    border-radius: 50px;
+    position: relative;
+    margin: 20px auto;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    animation: bounce 2s infinite;
+    border: 1px solid #ffeeba;
+}
+
+.info-bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 15px 10px 0;
+    border-style: solid;
+    border-color: #fffae6 transparent transparent transparent;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* ===== 5. القائمة (Nav) ===== */
+nav {
+    background-color: #333;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.4s;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+nav a {
+    color: white;
+    padding: 15px 20px;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+    transition: var(--transition);
+}
+
+nav a:hover {
+    background-color: var(--primary-color);
+    box-shadow: 0 0 8px var(--primary-color), 0 0 12px var(--primary-color) inset;
+}
+
+/* ===== 6. المحتوى الرئيسي والسكاشن ===== */
+main {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+section {
+    background-color: var(--card-bg);
+    margin: 20px 10px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, background-color 0.4s;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.8s forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+section:hover { transform: translateY(-5px); }
+
+/* ===== 7. الجداول (Tables) - مهمة جداً لقائمة الطلاب ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+table th {
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) { background-color: #f9f9f9; }
+table tr:hover { background-color: #e9ecef; }
+
+/* صندوق الجداول (schedule-box) */
+.schedule-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin: 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.schedule-box:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 18px var(--accent-color);
+}
+
+.schedule-box img {
+    width: 90%;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+/* ===== 8. البحث والمدخلات ===== */
+input[type="text"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 25px;
+    border: 2px solid #ddd;
+    font-size: 16px;
+    font-family: 'Cairo';
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: var(--primary-color);
+}
+
+/* ===== 9. أزرار وضع الليل والترحيب ===== */
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+#themeButton, header button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Cairo';
+    transition: var(--transition);
+}
+
+#themeButton { background: white; color: var(--accent-color); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+header button { background: white; color: var(--accent-color); margin-top: 15px; }
+
+#themeButton:hover, header button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+/* ===== 10. الـ Dark Mode ===== */
+body.dark-mode {
+    background-color: var(--dark-bg);
+    color: #f0f0f0;
+}
+
+body.dark-mode section, body.dark-mode .schedule-box {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+body.dark-mode nav { background-color: #000; }
+body.dark-mode table { background: #222; color: white; }
+body.dark-mode table tr:nth-child(even) { background-color: #2a2a2a; }
+body.dark-mode table tr:hover { background-color: #333; }
+
+/* ===== 11. الفوتر والتجاوب ===== */
+footer {
+    background-color: var(--accent-color);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+    nav a { display: block; padding: 12px; border-bottom: 1px solid #444; }
+    .book-logo { display: none; }
+    header { padding: 30px 10px; }
+    .info-bubble { width: 90%; font-size: 14px; }
+}
+.honor-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 40px 20px;
+}
+
+.honor-card {
+    background: white;
+    width: 280px;
+    border-radius: 20px;
+    text-align: center;
+    padding: 30px 20px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.4s ease;
+    border-top: 8px solid #ddd;
+}
+
+.honor-card:hover {
+    transform: translateY(-15px);
+}
+
+.honor-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    object-fit: cover;
+}
+
+.rank {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 45px;
+    height: 45px;
+    background: #333;
+    color: white;
+    border-radius: 50%;
+    line-height: 45px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* ألوان المراكز */
+.gold { border-top-color: #ffd700; background: linear-gradient(to bottom, #fffaf0, #fff); }
+.silver { border-top-color: #c0c0c0; }
+.bronze { border-top-color: #cd7f32; }
+
+.gold .rank { background: #ffd700; color: #000; }
+
+.score {
+    color: #1a73e8;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin: 10px 0;
+}
+
+.badge {
+    background: #f1f3f4;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Dark Mode */
+body.dark-mode .honor-card {
+    background: #1e1e1e;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+html { scroll-behavior: smooth; }

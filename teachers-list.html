@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>قائمة المدرسين | مدرسة بنايوس</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>قائمة المدرسين بالمدرسة</h1>
+    </header>
+    <nav>
+        <a href="index.html">الرئيسية</a>
+    </nav>
+    <main>
+        <section>
+            <input type="text" id="teacherSearch" placeholder="ابحث باسم المدرس..." onkeyup="searchTable('teacherSearch','teachersTable')">
+            <table id="teachersTable">
+                <thead>
+                    <tr><th>الاسم</th><th>التخصص</th></tr>
+                </thead>
+                <tbody>
+                    <ul>
+                    <tr><td>أ/ حسين زاهر</td><td>علوم متكاملة</td></tr>
+                    <tr><td>أ/ طارق وحيد</td><td>الرياضيات</td></tr>
+                    <tr><td>أ/ محمد إسماعيل</td><td>اللغة العربية / التربية الدينية</td></tr>
+                    <tr><td>أ/ رشا عبدالرحمن</td><td>اللغة الإنجليزية</td></tr>
+                    <tr><td>أ/عباس رفعت</td><td>تاريخ</td></tr>
+                    <tr><td>أ/هبة بشري</td><td>برمجة وذكاء إصطناعي</td></tr>
+                    <tr><td>أ/سالي حسن</td><td>برمجة وذكاء إصطناعي</td></tr>
+                    <tr><td>م/عادل عبدالرحمن</td><td>اللغة الفرنسية</td></tr>
+                    <tr><td>م/ جمال همام</td><td>اللغة الفرنسية</td></tr>
+                    <tr><td>أ/محمود السعيد</td><td>الرياضيات</td></tr>
+                    <tr><td>أ/أحمد إسماعيل</td><td>نشاط </td></tr>
+                    <tr><td>أ/محمد نبيل</td><td>نشاط </td></tr>
+                    <tr><td>أ/أسامه علي </td><td>نشاط رياضي (ألعاب)</td></tr>
+                    <tr><td>أ/داليا محمود</td><td>اخصائي إجتماعي</td></tr>
+                    <tr><td>أ/شيماء عبدالباسط</td><td>تربية فنيه</td></tr>
+                    <tr><td>أ/ جمال جادو</td><td>علوم متكاملة</td></tr>
+                    <tr><td>أ/ عبدالله سالم</td><td>تاريخ</td></tr>
+                    <tr><td>أ/همت محمد</td><td>الفلسفة</td></tr>
+                    <tr><td>أ/محمد عبدالله</td><td>نشاط</td></tr>
+                    <tr><td>أ/الشيماء محمد</td><td>نشاط</td></tr>
+                    <tr><td>أ/امنيه احمد</td><td>نشاط</td></tr>
+                    <tr><td>أ/محمد احمد محمد</td><td>نشاط</td></tr>
+                    <tr><td>أ/سعيد الشحات</td><td>نشاط</td></tr>
+                    <tr><td>أ/منال مصطفي</td><td>نشاط</td></tr>
+                    <tr><td>أ/إسلام محمد</td><td>الفلسفة</td></tr>
+                    <tr><td>أ/أحمد سعيد</td><td>اخصائي إجتماعي</td></tr>
+                    <tr><td>أ/أحمد طه</td><td>اللغة العربية</td></tr>
+                    <tr><td>أ/عادل محمد</td><td>اللغة العربية/التربية الدينية</td></tr>
+                    </ul>
+                </tbody>
+            </table>    
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 مدرسة بنايوس الثانوية المشتركة</p>
+    </footer>
+
+    <script>
+        function searchTable(inputId, tableId){
+            const input = document.getElementById(inputId).value.toLowerCase();
+            const table = document.getElementById(tableId);
+            const tr = table.getElementsByTagName("tr");
+            for(let i=1;i<tr.length;i++){
+                let tdText = tr[i].textContent.toLowerCase();
+                tr[i].style.display = tdText.indexOf(input) > -1 ? "" : "none";
+            }
+        }
+    </script>
+</body>
+</html>

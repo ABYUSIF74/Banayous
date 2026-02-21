@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جداول الحصص - مدرسة بنايوس</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+
+    <style>
+        /* تنسيقات إضافية خاصة بصفحة الجداول */
+        .controls-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 40px 10px 10px;
+            border: 2px solid #0d6efd;
+            border-radius: 25px;
+            font-family: 'Cairo';
+            outline: none;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #0d6efd;
+        }
+
+        .print-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Cairo';
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .print-btn:hover { background-color: #218838; transform: scale(1.05); }
+
+        .tab-btn {
+            background-color: white;
+            color: #0d6efd;
+            border: 2px solid #0d6efd;
+            padding: 10px 25px;
+            cursor: pointer;
+            font-family: 'Cairo';
+            font-weight: bold;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        .tab-btn:hover { background-color: #0d6efd; color: white; }
+        .tab-btn.active { background-color: #0d6efd; color: white; box-shadow: 0 4px 15px rgba(13, 110, 253, 0.4); }
+
+        table td.dimmed { opacity: 0.2; background-color: #f8f9fa !important; }
+        table td.highlight { background-color: #fffae6 !important; border: 2px solid #ffc107; font-weight: bold; transform: scale(1.02); }
+
+        /* إعدادات الطباعة */
+        @media print {
+            body { background: white; color: black; }
+            nav, header, .controls-container, .class-buttons, .back-btn, .theme-toggle { display: none !important; }
+            .table-box { display: none; }
+            .table-box.active-tab { display: block !important; }
+            table { width: 100%; border: 2px solid black; }
+            table th { background-color: #ddd !important; color: black !important; }
+            table td, table th { border: 1px solid black !important; }
+        }
+    </style>
+</head>
+<body>
+
+<header id="home">
+    <div class="theme-toggle">
+        <button id="themeButton">🌙 وضع الليل</button>
+    </div>
+    <h1><i class="fas fa-calendar-alt"></i> جداول الصف الأول الثانوي</h1>
+</header>
+
+<nav>
+    <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+    <a href="list.html"><i class="fas fa-users"></i> قائمة الطلاب</a>
+    <a href="teachers-list.html"><i class="fas fa-chalkboard-teacher"></i> قائمة المعلمين</a>
+    <a href="tables.html" style="background-color: #791d1d;"><i class="fas fa-calendar-alt"></i> جداول الحصص</a>
+</nav>
+
+<main style="max-width: 1200px; margin: 20px auto; padding: 10px;">
+    
+    <div class="controls-container">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" onkeyup="filterTimetable()" placeholder="ابحث عن مادة أو مدرس عشان تنور في الجدول...">
+        </div>
+        <button class="print-btn" onclick="window.print()"><i class="fas fa-print"></i> طباعة الجدول</button>
+    </div>
+
+    <div class="class-buttons" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+        <button class="tab-btn active" onclick="showTable(event, 'c1')">فصل 1/1</button>
+        <button class="tab-btn" onclick="showTable(event, 'c2')">فصل 1/2</button>
+        <button class="tab-btn" onclick="showTable(event, 'c3')">فصل 1/3</button>
+        <button class="tab-btn" onclick="showTable(event, 'c4')">فصل 1/4</button>
+        <button class="tab-btn" onclick="showTable(event, 'c5')">فصل 1/5</button>
+    </div>
+
+    <div id="c1" class="table-box active-tab" style="display: block;">
+        <section style="overflow-x: auto;">
+            <h2 style="text-align: center; color: #0d6efd;">جدول فصل 1/1</h2>
+            <table class="timetable">
+                <thead>
+                    <tr>
+                        <th>اليوم</th>
+                        <th>1 <br><small>8:00 - 8:45</small></th>
+                        <th>2 <br><small>9:00 - 9:45</small></th>
+                        <th>3 <br><small>10:00 - 10:45</small></th>
+                        <th>4 <br><small>11:00 - 11:45</small></th>
+                        <th>5 <br><small>12:00 - 12:45</small></th>
+                        <th>6 <br><small>13:00 - 13:45</small></th>
+                        <th>7 <br><small>14:00 - 14:45</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>الأحد</strong></td>
+                        <td>رياضة<br><small>محمود السعيد</small></td>
+                        <td>الفلسفة<br><small>همت محمد</small></td>
+                        <td>الفلسفة<br><small>همت محمد</small></td>
+                        <td>اللغة الفرنسية<br><small>عادل عبدالله</small></td>
+                        <td>برمجة<br><small>هبة بشرى</small></td>
+                        <td>برمجة<br><small>هبة بشرى</small></td>
+                        <td>علوم متكاملة<br><small>جمال جادو</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الإثنين</strong></td>
+                        <td>التاريخ<br><small>عبدالله</small></td>
+                        <td>برمجة<br><small>هبة بشرى</small></td>
+                        <td>برمجة<br><small>هبة بشرى</small></td>
+                        <td>عربى<br><small>عادل محمد</small></td>
+                        <td>انجليزى<br><small>رشا عبد الرحمن</small></td>
+                        <td>علوم متكاملة<br><small>جمال جادو</small></td>
+                        <td>رياضة<br><small>محمود السعيد</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الثلاثاء</strong></td>
+                        <td>التاريخ<br><small>عبدالله</small></td>
+                        <td>انجليزى<br><small>رشا عبد الرحمن</small></td>
+                        <td>الفلسفة<br><small>همت محمد</small></td>
+                        <td>عربى<br><small>عادل محمد</small></td>
+                        <td>علوم متكاملة<br><small>جمال جادو</small></td>
+                        <td>رياضة<br><small>محمود السعيد</small></td>
+                        <td>الفلسفة<br><small>همت محمد</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الأربعاء</strong></td>
+                        <td>دين<br><small>عادل محمد</small></td>
+                        <td>التاريخ<br><small>عبدالله</small></td>
+                        <td>نشاط<br><small>مجموعة معلمين</small></td>
+                        <td>علوم متكاملة<br><small>جمال جادو</small></td>
+                        <td>رياضة<br><small>محمود السعيد</small></td>
+                        <td>رياضة<br><small>محمود السعيد</small></td>
+                        <td>انجليزى<br><small>رشا عبد الرحمن</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الخميس</strong></td>
+                        <td>اللغة الفرنسية<br><small>عادل عبدالله</small></td>
+                        <td>العاب<br><small>اسامه على</small></td>
+                        <td>انجليزى<br><small>رشا عبد الرحمن</small></td>
+                        <td>عربى<br><small>عادل محمد</small></td>
+                        <td>دين<br><small>عادل محمد</small></td>
+                        <td>عربى<br><small>عادل محمد</small></td>
+                        <td>التاريخ<br><small>عبدالله</small></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <div id="c2" class="table-box" style="display: none;">
+        <section style="overflow-x: auto;">
+            <h2 style="text-align: center; color: #0d6efd;">جدول فصل 1/2</h2>
+            <table class="timetable">
+                <thead>
+                    <tr>
+                        <th>اليوم</th>
+                        <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>الأحد</strong></td>
+                        <td>نشاط<br><small>مجموعة معلمين</small></td>
+                        <td>برمجه<br><small>هبه بشرى</small></td>
+                        <td>برمجه<br><small>هبه بشرى</small></td>
+                        <td>التاريخ<br><small>عباس رفعت</small></td>
+                        <td>انجليزى<br><small>رشا عبد الرحمن</small></td>
+                        <td>انجليزى<br><small>رشا عبد الرحمن</small></td>
+                        <td>عربى<br><small>محمد اسماعيل</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الإثنين</strong></td>
+                        <td>اللغه الفرنسيه<br><small>جمال همام</small></td>
+                        <td>رياضه<br><small>طارق وحيد</small></td>
+                        <td>رياضه<br><small>طارق وحيد</small></td>
+                        <td>رياضه<br><small>طارق وحيد</small></td>
+                        <td>برمجه<br><small>هبه بشرى</small></td>
+                        <td>برمجه<br><small>هبه بشرى</small></td>
+                        <td>التاريخ<br><small>عباس رفعت</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الثلاثاء</strong></td>
+                        <td>دين<br><small>عادل محمد</small></td>
+                        <td>التاريخ<br><small>عباس رفعت</small></td>
+                        <td>عربى<br><small>محمد اسماعيل</small></td>
+                        <td>انجليزى<br><small>رشا عبد الرحمن</small></td>
+                        <td>عربى<br><small>محمد اسماعيل</small></td>
+                        <td>دين<br><small>عادل محمد</small></td>
+                        <td>انجليزى<br><small>رشا عبد الرحمن</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الأربعاء</strong></td>
+                        <td>الفلسفه<br><small>اسلام محمد</small></td>
+                        <td>علوم متكامله<br><small>حسين زاهر</small></td>
+                        <td>الفلسفه<br><small>اسلام محمد</small></td>
+                        <td>اللغه الفرنسيه<br><small>جمال همام</small></td>
+                        <td>علوم متكامله<br><small>حسين زاهر</small></td>
+                        <td>رياضه<br><small>طارق وحيد</small></td>
+                        <td>رياضه<br><small>طارق وحيد</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الخميس</strong></td>
+                        <td>العاب<br><small>اسامه على</small></td>
+                        <td>التاريخ<br><small>عباس رفعت</small></td>
+                        <td>عربى<br><small>محمد اسماعيل</small></td>
+                        <td>الفلسفه<br><small>اسلام محمد</small></td>
+                        <td>الفلسفه<br><small>اسلام محمد</small></td>
+                        <td>علوم متكامله<br><small>حسين زاهر</small></td>
+                        <td>علوم متكامله<br><small>حسين زاهر</small></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <div id="c3" class="table-box" style="display:none;">
+        <section style="text-align:center;">
+            <h2>فصل 1/3</h2>
+            <p>سيتم تحويله إلى جدول نصي قريباً...</p>
+            <img src="images/c3.jpg" alt="جدول فصل 1/3" style="width: 100%; border-radius: 10px;">
+        </section>
+    </div>
+    <div id="c4" class="table-box" style="display:none;">
+        <section style="text-align:center;">
+            <h2>فصل 1/4</h2>
+            <p>سيتم تحويله إلى جدول نصي قريباً...</p>
+            <img src="images/c4.jpg" alt="جدول فصل 1/4" style="width: 100%; border-radius: 10px;">
+        </section>
+    </div>
+    <div id="c5" class="table-box" style="display:none;">
+        <section style="text-align:center;">
+            <h2>فصل 1/5</h2>
+            <p>سيتم تحويله إلى جدول نصي قريباً...</p>
+            <img src="images/c5.jpg" alt="جدول فصل 1/5" style="width: 100%; border-radius: 10px;">
+        </section>
+    </div>
+
+</main>
+
+<script>
+    // تغيير وضع الليل والنهار
+    const themeButton = document.getElementById('themeButton');
+    themeButton.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        themeButton.textContent = document.body.classList.contains('dark-mode') ? "☀️ وضع النهار" : "🌙 وضع الليل";
+    });
+
+    // التبديل بين الجداول
+    function showTable(evt, id) {
+        // إخفاء كل الجداول
+        let boxes = document.getElementsByClassName("table-box");
+        for (let i = 0; i < boxes.length; i++) {
+            boxes[i].style.display = "none";
+            boxes[i].classList.remove("active-tab");
+        }
+        
+        // إزالة الأكتيف من الزراير
+        let btns = document.getElementsByClassName("tab-btn");
+        for (let i = 0; i < btns.length; i++) {
+            btns[i].classList.remove("active");
+        }
+
+        // إظهار المطلوب
+        let activeBox = document.getElementById(id);
+        activeBox.style.display = "block";
+        activeBox.classList.add("active-tab");
+        evt.currentTarget.classList.add("active");
+
+        // تنظيف البحث لما تغير الفصل
+        document.getElementById('searchInput').value = '';
+        filterTimetable();
+    }
+
+    // فلتر وبحث تفاعلي (بينور الخلايا المطلوبة)
+    function filterTimetable() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let activeTableBox = document.querySelector('.table-box.active-tab');
+        
+        if(!activeTableBox) return; // لو مفيش جدول شغال (صورة مثلاً)
+
+        let cells = activeTableBox.querySelectorAll('tbody td');
+
+        cells.forEach(cell => {
+            // تجاهل أول عمود (أيام الأسبوع)
+            if(cell.cellIndex === 0) return; 
+
+            let text = cell.innerText.toLowerCase();
+            
+            // شيل كل الكلاسات الأول
+            cell.classList.remove('dimmed', 'highlight');
+
+            if (input.trim() === "") {
+                // لو البحث فاضي، رجع كل حاجة لطبيعتها
+                return;
+            }
+
+            if (text.includes(input)) {
+                cell.classList.add('highlight');
+            } else {
+                cell.classList.add('dimmed');
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

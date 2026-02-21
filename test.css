@@ -1,0 +1,14 @@
+/* body */
+p{
+    color: chartreuse;
+    background-color: blue;
+    font-size: 40px;
+}
+pre{
+    color: rgb(127, 127, 158);
+    background-color: brown;
+    font-size: 30px;
+}
+.pro{
+    color:rgb(12, 8, 141);
+}

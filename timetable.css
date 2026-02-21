@@ -1,0 +1,45 @@
+body {
+    font-family: Arial;
+    text-align: center;
+    background: #f4f6f9;
+}
+
+.title {
+    margin-top: 20px;
+}
+
+.class-buttons button {
+    margin: 8px;
+    padding: 10px 20px;
+    border: none;
+    background: #0077ff;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.class-buttons button:hover {
+    background: #005ecc;
+}
+
+.table-box {
+    display: none;
+    margin-top: 20px;
+}
+
+.table-img {
+    width: 90%;
+    max-width: 700px;
+    border-radius: 10px;
+}
+
+.back-btn {
+    display: inline-block;
+    margin: 30px;
+    padding: 10px 20px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
