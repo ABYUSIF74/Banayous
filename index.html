@@ -8,19 +8,107 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <style>
+        /* التنسيق الأساسي للناف بار */
+        nav.navbar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2c3e50; /* يمكنك تغييره ليطابق ألوان موقعك */
+            padding: 10px 20px;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .nav-links a:hover {
+            background-color: #34495e; /* لون عند المرور بالماوس */
+        }
+
+        /* زر الهامبورجر - مخفي في الشاشات الكبيرة */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 26px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        /* الميديا كويري للهواتف (شاشات أصغر من 768px) */
+        @media (max-width: 768px) {
+            nav.navbar {
+                justify-content: space-between;
+                padding: 15px 20px;
+            }
+
+            .hamburger {
+                display: block; /* إظهار الزر في الهواتف */
+            }
+
+            .nav-links {
+                display: none; /* إخفاء القائمة افتراضياً */
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 100%;
+                background-color: #2c3e50;
+                text-align: center;
+                padding: 0;
+                box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+            /* الكلاس الذي سيتم إضافته بواسطة الجافاسكربت لإظهار القائمة */
+            .nav-links.active {
+                display: flex;
+                animation: slideDown 0.3s ease-out;
+            }
+
+            .nav-links a {
+                padding: 15px;
+                border-bottom: 1px solid #34495e;
+                width: 100%;
+            }
+            
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+        }
+
+        /* حركة بسيطة لظهور القائمة */
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 
 <body>
 
     <header id="home">
-        <!-- زرار وضع النهار والليل -->
         <div class="theme-toggle">
             <button id="themeButton">🌙 وضع الليل</button>
         </div>
 
-        <!-- شعار الكتاب -->
         <div class="book-logo">
             <div class="book-front">
                 📚🏫 مدرسة بنايوس الثانوية المشتركة 🎓✏️
@@ -30,7 +118,7 @@
             </div>
         </div>
 
-        <img src="images/ChatGPT Image Dec 22, 2025, 12_30_19 PM.png" class="chat" alt="" style="border-radius: 20px; box-shadow: 14px 19px 19px  rgba(101, 57, 214, 0.518);margin-bottom: 24px;">
+        <img src="images/ChatGPT Image Dec 22, 2025, 12_30_19 PM.png" class="chat" alt="شعار المدرسة" style="border-radius: 20px; box-shadow: 14px 19px 19px rgba(101, 57, 214, 0.518);margin-bottom: 24px;">
         <h1>مدرسة بنايوس الثانوية المشتركة</h1>
         <p>معًا نحو تعليم أفضل</p>
         <button class="tooltip" onclick="alert('اهلاً بيك في موقع مدرسة بنايوس الثانوية المشتركة🌟')">
@@ -39,23 +127,28 @@
         </button>
     </header>
 
-    <!-- سحابة التنبيه -->
-<div class="info-bubble">
-    <i class="fas fa-exclamation-triangle"></i>
-    <span>تنبيه هام: المدرسة مخصصة لطلاب الصف الأول الثانوي فقط (فصول ملحقة).</span>
-</div>
+    <div class="info-bubble">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span>تنبيه هام: المدرسة مخصصة لطلاب الصف الأول الثانوي فقط (فصول ملحقة).</span>
+    </div>
 
-<nav>
-    <a href="#home"><i class="fas fa-home"></i> الرئيسية</a>
-    <a href="#about"><i class="fas fa-info-circle"></i> عن المدرسة</a>
-    <a href="#news"><i class="fas fa-newspaper"></i> الأخبار</a>
-    <a href="list.html"><i class="fas fa-users"></i> قائمة الطلاب</a>
-    <a href="teachers-list.html"><i class="fas fa-chalkboard-teacher"></i> قائمة المعلمين</a>
-    <a href="tables.html"><i class="fas fa-calendar-alt"></i> جداول الحصص</a>
-    <a href="#qureo"><i class="fas fa-graduation-cap"></i> منصة Qureo</a>
-    <a href="honor.html" style="color: goldenrod;"> الاوائل</a>
-    <a href="#contact"><i class="fas fa-phone-alt"></i> تواصل معنا</a>
-</nav>
+    <nav class="navbar">
+        <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="nav-links" id="navLinks">
+            <a href="#home"><i class="fas fa-home"></i> الرئيسية</a>
+            <a href="#about"><i class="fas fa-info-circle"></i> عن المدرسة</a>
+            <a href="#news"><i class="fas fa-newspaper"></i> الأخبار</a>
+            <a href="list.html"><i class="fas fa-users"></i> قائمة الطلاب</a>
+            <a href="teachers-list.html"><i class="fas fa-chalkboard-teacher"></i> قائمة المعلمين</a>
+            <a href="tables.html"><i class="fas fa-calendar-alt"></i> جداول الحصص</a>
+            <a href="#qureo"><i class="fas fa-graduation-cap"></i> منصة Qureo</a>
+            <a href="honor.html" style="color: goldenrod;"><i class="fas fa-medal"></i> الاوائل</a>
+            <a href="#contact"><i class="fas fa-phone-alt"></i> تواصل معنا</a>
+        </div>
+    </nav>
 
     <main>
         <section id="about">
@@ -88,7 +181,6 @@
                 </li>
                 <br />
                 <li><strong>أ/البرمجة :</strong> أ/هبة بشري</li>
-                
                 <li><strong>رقم الهاتف:</strong>
                     <a href="https://wa.me/201117966866" class="whats">01117966866</a>
                 </li>
@@ -99,7 +191,6 @@
                 </li>
             </ul>
         </section>
-
 
         <section id="social-media">
             <h3><mark>التواصل الاجتماعي</mark></h3>
@@ -119,8 +210,7 @@
     <footer>
         <p>© 2026 مدرسة بنايوس الثانوية المشتركة</p>
         <a href="https://www.facebook.com/share/1C3GxPxQUc/" target="_blank">
-            <i class="fab fa-facebook"></i> <!-- صفحة الفيسبوك -->
-        </a>
+            <i class="fab fa-facebook"></i> </a>
     </footer>
 
     <script>
@@ -135,18 +225,47 @@
             }
         });
 
+        // Hamburger Menu Logic (المنطق الخاص بزر الهامبورجر)
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // تغيير شكل الأيقونة بين الثلاث خطوط وعلامة الإغلاق (X)
+            if(navLinks.classList.contains('active')) {
+                hamburger.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        // إغلاق القائمة عند الضغط على أي رابط (للهواتف)
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        });
+
         // Fade-in animation for table rows (لو في صفحات الجداول)
         document.addEventListener("DOMContentLoaded", function () {
             const rows = document.querySelectorAll("#studentsTable tbody tr");
-            rows.forEach((row, index) => {
-                row.style.setProperty('--i', index);
-            });
+            if(rows) {
+                rows.forEach((row, index) => {
+                    row.style.setProperty('--i', index);
+                });
+            }
         });
 
         // بحث في جدول الطلاب
         function searchTable(inputId, tableId) {
             const input = document.getElementById(inputId).value.toLowerCase();
             const table = document.getElementById(tableId);
+            if(!table) return; // حماية من الأخطاء إذا لم يكن الجدول موجوداً
             const tr = table.getElementsByTagName("tr");
             for (let i = 1; i < tr.length; i++) {
                 let tdText = tr[i].textContent.toLowerCase();
