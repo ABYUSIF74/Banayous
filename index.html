@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="auth.js"></script>
 
     <style>
         /* التنسيق الأساسي للناف بار */
@@ -147,6 +148,23 @@
             <a href="#qureo"><i class="fas fa-graduation-cap"></i> منصة Qureo</a>
             <a href="honor.html" style="color: goldenrod;"><i class="fas fa-medal"></i> الاوائل</a>
             <a href="#contact"><i class="fas fa-phone-alt"></i> تواصل معنا</a>
+            
+            <!-- Auth Links -->
+            <div class="auth-section">
+                <div class="user-info" id="navUserInfo" style="display: none;">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="userName"></span>
+                </div>
+                <a href="login.html" class="auth-link auth-btn-hidden" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> دخول
+                </a>
+                <a href="register.html" class="auth-link auth-btn-hidden" id="registerBtn">
+                    <i class="fas fa-user-plus"></i> تسجيل
+                </a>
+                <a href="#" class="auth-link logout-btn" id="logoutBtn" style="display: none;" onclick="handleLogout(event)">
+                    <i class="fas fa-sign-out-alt"></i> خروج
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -166,7 +184,7 @@
         <section id="news">
             <h3><mark>آخر الأخبار</mark></h3>
             <ul>
-                <li> <b>لا يوجد اي اخبار في الوقت الحالي</b></li>
+                <li><b>الرجاء عدم الغياب لمصلحة الطلاب </b></li>
                 <li>الالتزام بالحضور واجب على الجميع</li>
             </ul>
         </section>
@@ -209,7 +227,12 @@
     <footer>
         <p>© 2026 مدرسة بنايوس الثانوية المشتركة</p>
         <a href="https://www.facebook.com/share/1C3GxPxQUc/" target="_blank">
-            <i class="fab fa-facebook"></i> </a>
+            <i class="fab fa-facebook"></i>
+        </a>
+        <div class="footer-user-info" id="footerUserInfo" style="display: none;">
+            <i class="fas fa-user-circle"></i>
+            <span id="footerUserName"></span>
+        </div>
     </footer>
 
     <script>
@@ -258,6 +281,67 @@
                     row.style.setProperty('--i', index);
                 });
             }
+        });
+
+        // Authentication functionality
+        function handleLogout(event) {
+            event.preventDefault();
+            if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+                logout();
+            }
+        }
+
+        // Display user info if logged in
+        function displayUserInfo() {
+            const user = isLoggedIn();
+            if (user) {
+                // Show user info in navbar
+                const navUserInfo = document.getElementById('navUserInfo');
+                if (navUserInfo) {
+                    navUserInfo.style.display = 'flex';
+                    const userName = document.getElementById('userName');
+                    if (userName) userName.textContent = user.fullName;
+                }
+                
+                // Show user info in footer
+                const footerUserInfo = document.getElementById('footerUserInfo');
+                if (footerUserInfo) {
+                    footerUserInfo.style.display = 'flex';
+                    const footerUserName = document.getElementById('footerUserName');
+                    if (footerUserName) footerUserName.textContent = user.fullName;
+                }
+                
+                // Show logout button
+                const logoutBtn = document.getElementById('logoutBtn');
+                if (logoutBtn) logoutBtn.style.display = 'inline-block';
+                
+                // Hide login/register buttons
+                const loginBtn = document.getElementById('loginBtn');
+                const registerBtn = document.getElementById('registerBtn');
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (registerBtn) registerBtn.style.display = 'none';
+            } else {
+                // Hide user info
+                const navUserInfo = document.getElementById('navUserInfo');
+                if (navUserInfo) navUserInfo.style.display = 'none';
+                const footerUserInfo = document.getElementById('footerUserInfo');
+                if (footerUserInfo) footerUserInfo.style.display = 'none';
+                
+                // Hide logout button
+                const logoutBtn = document.getElementById('logoutBtn');
+                if (logoutBtn) logoutBtn.style.display = 'none';
+                
+                // Show login/register buttons
+                const loginBtn = document.getElementById('loginBtn');
+                const registerBtn = document.getElementById('registerBtn');
+                if (loginBtn) loginBtn.style.display = 'inline-block';
+                if (registerBtn) registerBtn.style.display = 'inline-block';
+            }
+        }
+
+        // Call displayUserInfo on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            displayUserInfo();
         });
 
         // بحث في جدول الطلاب

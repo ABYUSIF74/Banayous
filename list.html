@@ -4,6 +4,7 @@
     <title>قائمة الطلاب | مدرسة بنايوس</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="auth.js"></script>
 </head>
 <!-- سحابة التنبيه -->
 <div class="info-bubble">
@@ -217,6 +218,21 @@
                 tr[i].style.display = tdText.indexOf(input) > -1 ? "" : "none";
             }
         }
+
+        // Display user info on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = isLoggedIn();
+            if (user) {
+                const footer = document.querySelector('footer');
+                if (footer) {
+                    const userInfo = document.createElement('div');
+                    userInfo.className = 'footer-user-info';
+                    userInfo.style.cssText = 'display: flex; align-items: center; gap: 10px; margin-top: 10px; padding: 8px 16px; background: rgba(102, 126, 234, 0.2); border-radius: 25px; border: 1px solid rgba(102, 126, 234, 0.3);';
+                    userInfo.innerHTML = `<i class="fas fa-user-circle"></i><span>${user.fullName}</span>`;
+                    footer.appendChild(userInfo);
+                }
+            }
+        });
     </script>
 </body>
 </html>

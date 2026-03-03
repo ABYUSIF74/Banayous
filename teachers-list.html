@@ -5,6 +5,7 @@
     <title>قائمة المدرسين | مدرسة بنايوس</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="auth.js"></script>
 </head>
 <body>
     <header>
@@ -24,6 +25,8 @@
                     <ul>
                     <tr><td>أ/ حسين زاهر</td><td>علوم متكاملة</td></tr>
                     <tr><td>أ/ طارق وحيد</td><td>الرياضيات</td></tr>
+                    <tr><td>أ/ سماح محمد</td><td>الرياضيات</td></tr>
+                    <tr><td>أ/ نادية صلاح</td><td>علوم متكاملة</td></tr>
                     <tr><td>أ/ محمد إسماعيل</td><td>اللغة العربية / التربية الدينية</td></tr>
                     <tr><td>أ/ رشا عبدالرحمن</td><td>اللغة الإنجليزية</td></tr>
                     <tr><td>أ/عباس رفعت</td><td>تاريخ</td></tr>
@@ -33,9 +36,9 @@
                     <tr><td>م/ جمال همام</td><td>اللغة الفرنسية</td></tr>
                     <tr><td>أ/محمود السعيد</td><td>الرياضيات</td></tr>
                     <tr><td>أ/أحمد إسماعيل</td><td>نشاط </td></tr>
-                    <tr><td>أ/محمد نبيل</td><td>نشاط </td></tr>
-                    <tr><td>أ/أسامه علي </td><td>نشاط رياضي (ألعاب)</td></tr>
+                    <tr><td>أ/محمد نبيل</td><td>اخصائي نفسي</td></tr>
                     <tr><td>أ/داليا محمود</td><td>اخصائي إجتماعي</td></tr>
+                    <tr><td>أ/نجلاء عبدالظاهر</td><td>نشاط رياضي (ألعاب)</td></tr>
                     <tr><td>أ/شيماء عبدالباسط</td><td>تربية فنيه</td></tr>
                     <tr><td>أ/ جمال جادو</td><td>علوم متكاملة</td></tr>
                     <tr><td>أ/ عبدالله سالم</td><td>تاريخ</td></tr>
@@ -50,6 +53,13 @@
                     <tr><td>أ/أحمد سعيد</td><td>اخصائي إجتماعي</td></tr>
                     <tr><td>أ/أحمد طه</td><td>اللغة العربية</td></tr>
                     <tr><td>أ/عادل محمد</td><td>اللغة العربية/التربية الدينية</td></tr>
+                    <tr><td>أ/نورهان محمد</td><td>اللغة العربية/التربية الدينية</td></tr>
+                    <tr><td>أ/مشيرة عادل</td><td>اللغة الفرنسية</td></tr>
+                    <tr><td>أ/شيماءإبراهيم</td><td>الرياضيات</td></tr>
+                    <tr><td>أ/هبة جمال</td><td>اللغة الفرنسية</td></tr>
+                    <tr><td>أ/منال إمام</td><td>الفلسفة</td></tr>
+                    <tr><td>أ/هبة عبدالقوي خاطر</td><td>نشاط</td></tr>
+                    <tr><td>أ/اميره عبدالله</td><td>نشاط</td></tr>
                     </ul>
                 </tbody>
             </table>    
@@ -70,6 +80,21 @@
                 tr[i].style.display = tdText.indexOf(input) > -1 ? "" : "none";
             }
         }
+
+        // Display user info on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = isLoggedIn();
+            if (user) {
+                const footer = document.querySelector('footer');
+                if (footer) {
+                    const userInfo = document.createElement('div');
+                    userInfo.className = 'footer-user-info';
+                    userInfo.style.cssText = 'display: flex; align-items: center; gap: 10px; margin-top: 10px; padding: 8px 16px; background: rgba(102, 126, 234, 0.2); border-radius: 25px; border: 1px solid rgba(102, 126, 234, 0.3);';
+                    userInfo.innerHTML = `<i class="fas fa-user-circle"></i><span>${user.fullName}</span>`;
+                    footer.appendChild(userInfo);
+                }
+            }
+        });
     </script>
 </body>
 </html>

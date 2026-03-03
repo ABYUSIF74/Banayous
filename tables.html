@@ -6,7 +6,8 @@
     <title>جداول الحصص - مدرسة بنايوس</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="style.css">
+    <script src="auth.js"></script>
 
     <style>
         /* تنسيقات إضافية خاصة بصفحة الجداول */
@@ -81,11 +82,12 @@
         /* إعدادات الطباعة */
         @media print {
             body { background: white; color: black; }
-            nav, header, .controls-container, .class-buttons, .back-btn, .theme-toggle { display: none !important; }
+            nav, header, title,.controls-container, .class-buttons, .back-btn, .theme-toggle { display: none !important; }
             .table-box { display: none; }
+
             .table-box.active-tab { display: block !important; }
-            table { width: 100%; border: 2px solid black; }
-            table th { background-color: #ddd !important; color: black !important; }
+            table { width: 100.5%; border: 2px solid black;border-radius: 30px; }
+            table th { background-color: #1ba7b1 !important; color: black !important; }
             table td, table th { border: 1px solid black !important; }
         }
     </style>
@@ -123,7 +125,7 @@
         <button class="tab-btn" onclick="showTable(event, 'c4')">فصل 1/4</button>
         <button class="tab-btn" onclick="showTable(event, 'c5')">فصل 1/5</button>
     </div>
-
+    <!--جدول فصل 1\1-->
     <div id="c1" class="table-box active-tab" style="display: block;">
         <section style="overflow-x: auto;">
             <h2 style="text-align: center; color: #0d6efd;">جدول فصل 1/1</h2>
@@ -131,132 +133,364 @@
                 <thead>
                     <tr>
                         <th>اليوم</th>
-                        <th>1 <br><small>8:00 - 8:45</small></th>
-                        <th>2 <br><small>9:00 - 9:45</small></th>
-                        <th>3 <br><small>10:00 - 10:45</small></th>
-                        <th>4 <br><small>11:00 - 11:45</small></th>
-                        <th>5 <br><small>12:00 - 12:45</small></th>
-                        <th>6 <br><small>13:00 - 13:45</small></th>
-                        <th>7 <br><small>14:00 - 14:45</small></th>
+                         <th>1 <br><small>7:10 - 7:50</small></th>
+                        <th>2 <br><small>7:50 - 8:30</small></th>
+                        <th>3 <br><small>8:30 - 9:10</small></th>
+                        <th>4 <br><small>9:10 - 9:45</small></th>
+                        <th>5 <br><small>9:55 - 10:30</small></th>
+                        <th>6 <br><small>10:30 - 11:05</small></th>
+                        <th>7 <br><small>11:05 - 11:35</small></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><strong>الأحد</strong></td>
-                        <td>رياضة<br><small>محمود السعيد</small></td>
+                        <td>رياضيات<br><small>محمود السعيد</small></td>
                         <td>الفلسفة<br><small>همت محمد</small></td>
                         <td>الفلسفة<br><small>همت محمد</small></td>
                         <td>اللغة الفرنسية<br><small>عادل عبدالله</small></td>
                         <td>برمجة<br><small>هبة بشرى</small></td>
                         <td>برمجة<br><small>هبة بشرى</small></td>
-                        <td>علوم متكاملة<br><small>جمال جادو</small></td>
+                        <td><mark>علوم متكاملة</mark><br><small>جمال جادو</small></td>
                     </tr>
                     <tr>
                         <td><strong>الإثنين</strong></td>
-                        <td>التاريخ<br><small>عبدالله</small></td>
+                        <td>التاريخ<br><small>عبدالله سالم</small></td>
+                        <td><mark>برمجة</mark><br><small>هبة بشرى</small></td>
                         <td>برمجة<br><small>هبة بشرى</small></td>
-                        <td>برمجة<br><small>هبة بشرى</small></td>
-                        <td>عربى<br><small>عادل محمد</small></td>
-                        <td>انجليزى<br><small>رشا عبد الرحمن</small></td>
+                        <td>اللغة العربية<br><small>أحمد طه</small></td>
+                        <td>اللغة الانجليزية<br><small>رشا عبد الرحمن</small></td>
                         <td>علوم متكاملة<br><small>جمال جادو</small></td>
-                        <td>رياضة<br><small>محمود السعيد</small></td>
+                        <td><mark>الرياضيات</mark><br><small>محمود السعيد</small></td>
                     </tr>
                     <tr>
                         <td><strong>الثلاثاء</strong></td>
-                        <td>التاريخ<br><small>عبدالله</small></td>
-                        <td>انجليزى<br><small>رشا عبد الرحمن</small></td>
+                        <td>التاريخ<br><small>عبدالله سالم</small></td>
+                        <td>اللغة الانجليزية<br><small>رشا عبد الرحمن</small></td>
                         <td>الفلسفة<br><small>همت محمد</small></td>
-                        <td>عربى<br><small>عادل محمد</small></td>
+                        <td>اللغة العربية <br><small>أحمد طه</small></td>
                         <td>علوم متكاملة<br><small>جمال جادو</small></td>
-                        <td>رياضة<br><small>محمود السعيد</small></td>
-                        <td>الفلسفة<br><small>همت محمد</small></td>
+                        <td>رياضيات<br><small>محمود السعيد</small></td>
+                        <td><mark>الفلسفة</mark><br><small>همت محمد</small></td>
                     </tr>
                     <tr>
                         <td><strong>الأربعاء</strong></td>
-                        <td>دين<br><small>عادل محمد</small></td>
-                        <td>التاريخ<br><small>عبدالله</small></td>
+                        <td><mark>التربية الدينية الاسلامية</mark><br><small>عادل محمد</small></td>
+                        <td>التاريخ<br><small>عبدالله سالم</small></td>
                         <td>نشاط<br><small>مجموعة معلمين</small></td>
                         <td>علوم متكاملة<br><small>جمال جادو</small></td>
-                        <td>رياضة<br><small>محمود السعيد</small></td>
-                        <td>رياضة<br><small>محمود السعيد</small></td>
-                        <td>انجليزى<br><small>رشا عبد الرحمن</small></td>
+                        <td>رياضيات<br><small>محمود السعيد</small></td>
+                        <td>رياضيات<br><small>محمود السعيد</small></td>
+                        <td><mark>اللغة الانجليزية</mark><br><small>رشا عبد الرحمن</small></td>
                     </tr>
                     <tr>
                         <td><strong>الخميس</strong></td>
-                        <td>اللغة الفرنسية<br><small>عادل عبدالله</small></td>
+                        <td><mark>اللغة الفرنسية</mark><br><small>عادل عبدالله</small></td>
                         <td>العاب<br><small>اسامه على</small></td>
-                        <td>انجليزى<br><small>رشا عبد الرحمن</small></td>
-                        <td>عربى<br><small>عادل محمد</small></td>
-                        <td>دين<br><small>عادل محمد</small></td>
-                        <td>عربى<br><small>عادل محمد</small></td>
-                        <td>التاريخ<br><small>عبدالله</small></td>
+                        <td>اللغة الانجليزية<br><small>رشا عبد الرحمن</small></td>
+                        <td>اللغة العربية<br><small> أحمد طه</small></td>
+                        <td>التربية الدينية الاسلامية<br><small>عادل محمد</small></td>
+                        <td><mark>اللغة العربية</mark><br><small>أحمد طه</small></td>
+                        <td><mark>التاريخ</mark><br><small>عبدالله سالم</small></td>
                     </tr>
+                    
                 </tbody>
             </table>
         </section>
     </div>
-
+    <!--جدول فصل 1\2-->
     <div id="c2" class="table-box" style="display: none;">
         <section style="overflow-x: auto;">
             <h2 style="text-align: center; color: #0d6efd;">جدول فصل 1/2</h2>
             <table class="timetable">
                 <thead>
                     <tr>
-                        <th>اليوم</th>
-                        <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+                        
                     </tr>
+                        <th>اليوم</th>
+
+                        <th>1 <br><small>7:10 - 7:50</small></th>
+                        <th>2 <br><small>7:50 - 8:30</small></th>
+                        <th>3 <br><small>8:30 - 9:10</small></th>
+                        <th>4 <br><small>9:10 - 9:45</small></th>
+                        <th>5 <br><small>9:55 - 10:30</small></th>
+                        <th>6 <br><small>10:30 - 11:05</small></th>
+                        <th>7 <br><small>11:05 - 11:35</small></th>
                 </thead>
                 <tbody>
                     <tr>
                         <td><strong>الأحد</strong></td>
                         <td>نشاط<br><small>مجموعة معلمين</small></td>
-                        <td>برمجه<br><small>هبه بشرى</small></td>
-                        <td>برمجه<br><small>هبه بشرى</small></td>
+                        <td><mark>برمجة</mark><br><small>هبه بشرى</small></td>
+                        <td>برمجة<br><small>هبه بشرى</small></td>
                         <td>التاريخ<br><small>عباس رفعت</small></td>
-                        <td>انجليزى<br><small>رشا عبد الرحمن</small></td>
-                        <td>انجليزى<br><small>رشا عبد الرحمن</small></td>
-                        <td>عربى<br><small>محمد اسماعيل</small></td>
+                        <td>اللغة الانجليزية<br><small>رشا عبد الرحمن</small></td>
+                        <td>اللغة الانجليزية<br><small>رشا عبد الرحمن</small></td>
+                        <td><mark>اللغة العربية</mark><br><small>عادل محمد</small></td>
                     </tr>
                     <tr>
                         <td><strong>الإثنين</strong></td>
-                        <td>اللغه الفرنسيه<br><small>جمال همام</small></td>
-                        <td>رياضه<br><small>طارق وحيد</small></td>
-                        <td>رياضه<br><small>طارق وحيد</small></td>
-                        <td>رياضه<br><small>طارق وحيد</small></td>
-                        <td>برمجه<br><small>هبه بشرى</small></td>
-                        <td>برمجه<br><small>هبه بشرى</small></td>
-                        <td>التاريخ<br><small>عباس رفعت</small></td>
+                        <td><mark>اللغة الفرنسية</mark><br><small>جمال همام</small></td>
+                        <td>الرياضيات<br><small>طارق وحيد</small></td>
+                        <td>الرياضيات<br><small>طارق وحيد</small></td>
+                        <td>الرياضيات<br><small>طارق وحيد</small></td>
+                        <td>برمجة<br><small>هبه بشرى</small></td>
+                        <td>برمجة<br><small>هبه بشرى</small></td>
+                        <td><mark>التاريخ</mark><br><small>عباس رفعت</small></td>
                     </tr>
                     <tr>
                         <td><strong>الثلاثاء</strong></td>
-                        <td>دين<br><small>عادل محمد</small></td>
+                        <td><mark>التربية الدينية الاسلامية</mark><br><small>عادل محمد</small></td>
                         <td>التاريخ<br><small>عباس رفعت</small></td>
-                        <td>عربى<br><small>محمد اسماعيل</small></td>
-                        <td>انجليزى<br><small>رشا عبد الرحمن</small></td>
-                        <td>عربى<br><small>محمد اسماعيل</small></td>
-                        <td>دين<br><small>عادل محمد</small></td>
-                        <td>انجليزى<br><small>رشا عبد الرحمن</small></td>
+                        <td>اللغة العربية<br><small>عادل محمد</small></td>
+                        <td>اللغة الانجليزية<br><small>رشا عبد الرحمن</small></td>
+                        <td>اللغة العربية<br><small>عادل محمد</small></td>
+                        <td>التربية الدينية الاسلامية<br><small>عادل محمد</small></td>
+                        <td><mark>اللغة الانجليزية</mark><br><small>رشا عبد الرحمن</small></td>
                     </tr>
                     <tr>
                         <td><strong>الأربعاء</strong></td>
-                        <td>الفلسفه<br><small>اسلام محمد</small></td>
-                        <td>علوم متكامله<br><small>حسين زاهر</small></td>
-                        <td>الفلسفه<br><small>اسلام محمد</small></td>
+                        <td>الفلسفة<br><small>اسلام محمد</small></td>
+                        <td>علوم متكاملة<br><small>حسين زاهر</small></td>
+                        <td>الفلسفة<br><small>اسلام محمد</small></td>
                         <td>اللغه الفرنسيه<br><small>جمال همام</small></td>
-                        <td>علوم متكامله<br><small>حسين زاهر</small></td>
-                        <td>رياضه<br><small>طارق وحيد</small></td>
-                        <td>رياضه<br><small>طارق وحيد</small></td>
+                        <td>علوم متكاملة<br><small>حسين زاهر</small></td>
+                        <td>الرياضيات<br><small>طارق وحيد</small></td>
+                        <td><mark>الرياضيات</mark><br><small>طارق وحيد</small></td>
                     </tr>
                     <tr>
                         <td><strong>الخميس</strong></td>
                         <td>العاب<br><small>اسامه على</small></td>
                         <td>التاريخ<br><small>عباس رفعت</small></td>
-                        <td>عربى<br><small>محمد اسماعيل</small></td>
-                        <td>الفلسفه<br><small>اسلام محمد</small></td>
-                        <td>الفلسفه<br><small>اسلام محمد</small></td>
-                        <td>علوم متكامله<br><small>حسين زاهر</small></td>
-                        <td>علوم متكامله<br><small>حسين زاهر</small></td>
+                        <td>اللغة العربية<br><small>عادل محمد</small></td>
+                        <td>الفلسفة<br><small>اسلام محمد</small></td>
+                        <td><mark>الفلسفة</mark><br><small>اسلام محمد</small></td>
+                        <td>علوم متكاملة<br><small>حسين زاهر</small></td>
+                        <td><mark>علوم متكاملة</mark><br><small>حسين زاهر</small></td>
                     </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+    <!--جدول فصل 1\3-->
+    <div id="c3" class="table-box" style="display: none;">
+        <section style="overflow-x: auto;">
+            <h2 style="text-align: center; color: #0d6efd;">جدول فصل 1/3</h2>
+            <table class="timetable">
+                <thead>
+                    <tr>
+                        <th>اليوم</th>
+                        <th>1 <br><small>7:10 - 7:50</small></th>
+                        <th>2 <br><small>7:50 - 8:30</small></th>
+                        <th>3 <br><small>8:30 - 9:10</small></th>
+                        <th>4 <br><small>9:20 - 9:55</small></th>
+                        <th>5 <br><small>9:55 - 10:30</small></th>
+                        <th>6 <br><small>10:30 - 11:05</small></th>
+                        <th>7 <br><small>11:05 - 11:35</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>الأحد</strong></td>
+                        <td>علوم متكاملة<br><small>ناديه صلاح</small></td>
+                        <td>اللغة الانجليزية<br><small>رشا عبدالرحمن</small></td>
+                        <td>برمجة<br><small>سالي حسن</small></td>
+                        <td>اللغة العربية<br><small>محمد اسماعيل</small></td>
+                        <td>فلسفة<br><small>همت محمد</small></td>
+                        <td>فلسفة<br><small>همت محمد</small></td>
+                        <td><mark>تاريخ</mark><br><small>عبدالله سالم</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الإثنين</strong></td>
+                        <td>الرياضيات<br><small>سماح محمد</small></td>
+                        <td>الرياضيات<br><small>سماح محمد</small></td>
+                        <td>الرياضيات<br><small>سماح محمد</small></td>
+                        <td>تاريخ<br><small>عبدالله سالم</small></td>
+                        <td>اللغة الفرنسية<br><small>جمال همام</small></td>
+                        <td>اللغة الانجليزية<br><small>رشا عبدالرحمن</small></td>
+                        <td><mark>اللغةالعربية</mark><br><small>محمد اسماعيل</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الثلاثاء</strong></td>
+                        <td><mark>برمجة</mark><br><small>سالي حسن</small></td>
+                        <td>برمجة<br><small>سالي حسن</small></td>
+                        <td>اللغة العربية<br><small>محمد اسماعيل</small></td>
+                        <td>فلسفة<br><small>همت محمد</small></td>
+                        <td>علوم متكاملة<br><small>نادية صلاح</small></td>
+                        <td><mark>فلسفة</mark><br><small>همت محمد</small></td>
+                        <td><mark>علوم متكاملة</mark><br><small>نادية صلاح</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الأربعاء</strong></td>
+                        <td><mark>اللغه الفرنسية</mark><br><small>جمال همام</small></td>
+                        <td>العاب<br><small>نجلاء عبدالظاهر</small></td>
+                        <td>تاريخ<br><small>عبدالله سالم</small></td>
+                        <td>برمجة<br><small>سالي حسن</small></td>
+                        <td>اللغة الانجليزية<br><small>رشا عبدالرحمن</small></td>
+                        <td>رياضيات<br><small>سماح محمد</small></td>
+                        <td><mark>رياضيات</mark><br><small>سماح محمد</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الخميس</strong></td>
+                        <td><mark>التربية الدينية الاسلامية</mark><br><small>عادل محمد</small></td>
+                        <td>نشاط<br><small>مجموعة معلمين</small></td>
+                        <td>تاريخ<br><small>عبدالله سالم</small></td>
+                        <td>التربية الدينية الاسلامية<br><small>عادل محمد</small></td>
+                        <td>علوم متكاملة<br><small>نادية صلاح</small></td>
+                        <td>اللغة العربية<br><small>محمد اسماعيل</small></td>
+                        <td><mark>اللغةالانجليزية</mark><br><small>رشا عبدالرحمن</small></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+
+     <!--جدول فصل 1\4-->
+    <div id="c4" class="table-box" style="display: none;">
+        <section style="overflow-x: auto;">
+            <h2 style="text-align: center; color: #0d6efd;">جدول فصل 1/4</h2>
+            <table class="timetable">
+                <thead>
+                    <tr>
+                        <th>اليوم</th>
+                        <th>1 <br><small>7:10 - 7:50</small></th>
+                        <th>2 <br><small>7:50 - 8:30</small></th>
+                        <th>3 <br><small>8:30 - 9:10</small></th>
+                        <th>4 <br><small>9:20 - 9:55</small></th>
+                        <th>5 <br><small>9:55 - 10:30</small></th>
+                        <th>6 <br><small>10:30 - 11:05</small></th>
+                        <th>7 <br><small>11:05 - 11:35</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>الأحد</strong></td>
+                        <td>تاريخ<br><small>عباس رفعت</small></td>
+                        <td>برمجة<br><small>سالي حسن</small></td>
+                        <td>اللغة الانجليزية<br><small>رشا عبدالرحمن</small></td>
+                        <td>علوم متكاملة<br><small>نادية صلاح</small></td>
+                        <td>التربية الدينية الاسلامية<br><small>نورهان محمد</small></td>
+                        <td>اللغة العربية<br><small>نورهان محمد</small></td>
+                        <td><mark>اللغة العربية</mark><br><small>نورهان محمد</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الإثنين</strong></td>
+                        <td><mark>برمجة</mark><br><small>سالي حسن</small></td>
+                        <td>برمجة<br><small>سالي حسن</small></td>
+                        <td>اللغة العربية<br><small>نورهان محمد</small></td>
+                        <td>اللغة العربية<br><small>نورهان محمد</small></td>
+                        <td>تاريخ<br><small>عباس رفعت</small></td>
+                        <td>علوم متكاملة<br><small>نادية صلاح</small></td>
+                        <td><mark>اللغةالانجليزية</mark><br><small>رشا عبدالرحمن</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الثلاثاء</strong></td>
+                        <td><mark>التربية الدينية الاسلامية</mark><br><small>نورهان محمد</small></td>
+                        <td>ألعاب<br><small>نجلاء عبدالظاهر</small></td>
+                        <td>اللغة الفرنسية<br><small>هبة جمال</small></td>
+                        <td>رياضيات<br><small>شيماء ابراهيم</small></td>
+                        <td>اللغة الفرنسية<br><small>رشا عبدالرحمن</small></td>
+                        <td>رياضيات<br><small>شيماء ابراهيم</small></td>
+                        <td><mark>رياضيات</mark><br><small>شيماء ابراهيم</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الأربعاء</strong></td>
+                        <td>العلوم المتكاملة<br><small>نادية صلاح </small></td>
+                        <td>فلسفة<br><small>منال إمام</small></td>
+                        <td>فلسفة<br><small>منال إمام</small></td>
+                        <td>تاريخ<br><small>عباس رفعت</small></td>
+                        <td>برمجة<br><small>سالي حسن</small></td>
+                        <td>نشاط<br><small>مجموعة معلمين</small></td>
+                        <td><mark>تاريخ</mark><br><small>عباس رفعت</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الخميس</strong></td>
+                        <td><mark>اللغة الفرنسية</mark><br><small>هبة جمال </small></td>
+                        <td>رياضيات<br><small>شيماء إبراهيم</small></td>
+                        <td>رياضيات<br><small>شيماء إبراهيم</small></td>
+                        <td>اللغة الانجليزية<br><small>رشا عبدالرحمن</small></td>
+                        <td>فلسفة<br><small>منال إمام</small></td>
+                        <td><mark>فلسفة</mark><br><small>منال إمام</small></td>
+                        <td><mark>العلوم المتكاملة</mark><br><small>نادية صلاح</small></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+
+      <!--جدول فصل 1\5-->
+    <div id="c5" class="table-box" style="display: none;">
+        <section style="overflow-x: auto;">
+            <h2 style="text-align: center; color: #0d6efd;">جدول فصل 1/5</h2>
+            <table class="timetable">
+                <thead>
+                    <tr>
+                        <th>اليوم</th>
+                        <th>1 <br><small>7:10 - 7:50</small></th>
+                        <th>2 <br><small>7:50 - 8:30</small></th>
+                        <th>3 <br><small>8:30 - 9:10</small></th>
+                        <th>4 <br><small>9:20 - 9:55</small></th>
+                        <th>5 <br><small>9:55 - 10:30</small></th>
+                        <th>6 <br><small>10:30 - 11:05</small></th>
+                        <th>7 <br><small>11:05 - 11:35</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>الأحد</strong></td>
+                        <td><mark>برمجة</mark><br><small>سالي حسن</small></td>
+                        <td>الرياضيات<br><small>محمود السعيد</small></td>
+                        <td>الرياضيات<br><small>محمود السعيد</small></td>
+                        <td>برمجة<br><small>سالي حسن</small></td>
+                        <td>اللغة العربية<br><small>محمد إسماعيل</small></td>
+                        <td>العلوم المتكاملة<br><small>جمال جادو</small></td>
+                        <td><mark>اللغة الفرنسية</mark><br><small>رشا عبدالرحمن</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الإثنين</strong></td>
+                        <td><mark>التربيةالدينيةالاسلامية</mark><br><small>نورهان محمد</small></td>
+                        <td>اللغة الانجليزية<br><small>رشا عبدالرحمن</small></td>
+                        <td>برمجة<br><small>سالي حسن</small></td>
+                        <td>تاريخ<br><small>عباس رفعت</small></td>
+                        <td>اللغة العربية<br><small>محمد إسماعيل</small></td>
+                        <td>الرياضيات<br><small>محمود السعيد</small></td>
+                        <td><mark>العلوم المتكاملة</mark><br><small>جمال جادو</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الثلاثاء</strong></td>
+                        <td><mark>اللغةالفرنسية</mark><br><small>مشيرة عادل</small></td>
+                        <td>التربية الدينية الاسلاميه<br><small>نورهان محمد </small></td>
+                        <td>برمجة<br><small>سالي حسن</small></td>
+                        <td>علوم متكاملة<br><small>جمال جادو</small></td>
+                        <td>الرياضيات<br><small>محمود السعيد</small></td>
+                        <td><mark>تاريخ</mark><br><small>عباس رفعت</small></td>
+                        <td><mark>رياضيات</mark><br><small>محمود السعيد</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الأربعاء</strong></td>
+                        <td>لعلوم المتكاملة<br><small>نجلاء عبدالظاهر</small></td>
+                        <td>اللغة العربية<br><small>محمد إسماعيل</small></td>
+                        <td>العلوم المتكاملة<br><small>جمال جادو</small></td>
+                        <td>اللغة الإنجليزية<br><small>رشا عبدالرحمن</small></td>
+                        <td>تاريخ<br><small>عباس رفعت</small></td>
+                        <td>فلسفة<br><small>منال إمام</small></td>
+                        <td><mark>فلسفة</mark><br><small>منال إمام</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>الخميس</strong></td>
+                        <td>تاريخ<br><small>عباس رفعت</small></td>
+                        <td>فلسفة<br><small>منال إمام</small></td>
+                        <td>فلسفة<br><small>منال إمام</small></td>
+                        <td>نشاط<br><small>مجموعة معلمين</small></td>
+                        <td>اللغة الفرنسية<br><small>مشيرة عادل </small></td>
+                        <td>اللغة الانجليزية<br><small>رشا عبدالرحمن</small></td>
+                        <td><mark>اللغة العربية</mark><br><small>محمد إسماعيل</small></td>
+                    </tr>
+
                 </tbody>
             </table>
         </section>
@@ -287,6 +521,21 @@
 </main>
 
 <script>
+    // Display user info on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const user = isLoggedIn();
+        if (user) {
+            const main = document.querySelector('main');
+            if (main) {
+                const userInfo = document.createElement('div');
+                userInfo.className = 'user-info';
+                userInfo.style.cssText = 'display: flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(102, 126, 234, 0.2); border-radius: 25px; margin: 10px auto; max-width: fit-content; border: 1px solid rgba(102, 126, 234, 0.3);';
+                userInfo.innerHTML = `<i class="fas fa-user-circle"></i><span>${user.fullName}</span>`;
+                main.insertBefore(userInfo, main.firstChild);
+            }
+        }
+    });
+
     // تغيير وضع الليل والنهار
     const themeButton = document.getElementById('themeButton');
     themeButton.addEventListener('click', () => {
@@ -351,6 +600,7 @@
         });
     }
 </script>
+<script src="auth.js"></script>
 
 </body>
 </html>

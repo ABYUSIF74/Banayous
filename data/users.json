@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "id": "user_1772562229422_leirtq35b",
+      "firstName": "Youssef",
+      "lastName": "Hesham",
+      "fullName": "Youssef Hesham",
+      "phone": "01146505725",
+      "email": "abyusif2026@gmail.com",
+      "password": "Mm123456",
+      "grade": "1/2",
+      "role": "student",
+      "createdAt": "2026-03-03T18:23:49.422Z",
+      "lastLogin": "2026-03-03T18:29:15.427Z"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "created_at": "2026-03-03T17:00:00Z",
+    "description": "School users database storage",
+    "note": "This file is used as a reference. Actual storage is in localStorage with key 'school_users_json'"
+  },
+  "default_admin": {
+    "id": "admin_001",
+    "firstName": "Admin",
+    "lastName": "User",
+    "fullName": "مدير النظام",
+    "email": "admin@banaious.edu.eg",
+    "password": "Admin1234",
+    "phone": "00000000000",
+    "role": "admin",
+    "grade": "admin",
+    "note": "Default administrator account. Password: Admin1234"
+  }
+}
